@@ -159,6 +159,19 @@ async def sum(itr: AnyIterable, start: T = None) -> T:
     return value
 
 
+async def tuple(itr: AnyIterable) -> Tuple[T]:
+    """
+    Consume a mixed iterable and return a tuple of items in order.
+
+    Example:
+
+        await tuple(range(5))
+        -> (0, 1, 2, 3, 4)
+
+    """
+    return builtins.tuple(item async for item in iter(itr))
+
+
 async def zip(*itrs: AnyIterable) -> AsyncIterator[Sequence[T]]:
     """
     Yield a tuple of items from mixed iterables until the shortest is consumed.
